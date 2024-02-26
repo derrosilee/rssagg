@@ -1,8 +1,8 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
-	"github.com/derrosilee/rssagg/internal/database"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
@@ -11,9 +11,9 @@ import (
 	"os"
 )
 
-type apiConfig struct {
-	DB *database.Queries
-}
+//type apiConfig struct {
+//	DB *database.Queries
+//}
 
 func main() {
 
@@ -27,6 +27,15 @@ func main() {
 		log.Fatal("PORT is not found in the Environment variable")
 	}
 
+	dbURL := os.Getenv("DB_URL")
+	if portString == "" {
+		log.Fatal("DB_URL is not found in the Environment variable")
+	}
+
+	_, err = sql.Open("postgres", dbURL)
+	if err != nil {
+		log.Fatal("Cant Connect to The database", err)
+	}
 	router := chi.NewRouter()
 
 	router.Use(cors.Handler(cors.Options{
