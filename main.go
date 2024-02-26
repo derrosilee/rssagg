@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/derrosilee/rssagg/internal/database"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
@@ -9,6 +10,10 @@ import (
 	"net/http"
 	"os"
 )
+
+type apiConfig struct {
+	DB *database.Queries
+}
 
 func main() {
 
