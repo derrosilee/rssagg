@@ -39,7 +39,7 @@ func main() {
 		log.Fatal("Cant Connect to The database", err)
 	}
 
-	apicfg := apiConfig{
+	apiCfg := apiConfig{
 		DB: database.New(conn),
 	}
 
