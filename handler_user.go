@@ -38,7 +38,7 @@ func (apiCfg *apiConfig) handlerCreateUser(w http.ResponseWriter, r *http.Reques
 func (apiCfg *apiConfig) handlerUserGetUser(w http.ResponseWriter, r *http.Request) {
 	apiKey, err := auth.GetAPIKey(r.Header)
 	if err != nil {
-		respondWithError(w, 403, fmt.Sprintf("Authentication error"))
+		respondWithError(w, 403, fmt.Sprintf("Authentication error %v", err))
 		return
 	}
 	user, err := apiCfg.DB.GetUserByAPIKey(r.Context(), apiKey)
