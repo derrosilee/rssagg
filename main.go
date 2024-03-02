@@ -34,10 +34,15 @@ func main() {
 		log.Fatal("DB_URL is not found in the Environment variable")
 	}
 
-	_, err = sql.Open("postgres", dbURL)
+	conn, err := sql.Open("postgres", dbURL)
 	if err != nil {
 		log.Fatal("Cant Connect to The database", err)
 	}
+
+	apicfg := apiConfig{
+		DB: database.New(conn),
+	}
+
 	router := chi.NewRouter()
 
 	router.Use(cors.Handler(cors.Options{
