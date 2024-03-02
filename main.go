@@ -3,17 +3,19 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"github.com/derrosilee/rssagg/internal/database"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"log"
 	"net/http"
 	"os"
 )
 
-//type apiConfig struct {
-//	DB *database.Queries
-//}
+type apiConfig struct {
+	DB *database.Queries
+}
 
 func main() {
 
