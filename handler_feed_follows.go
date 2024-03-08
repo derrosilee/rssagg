@@ -42,7 +42,7 @@ func (apiCfg *apiConfig) handlerGetFeedFollows(w http.ResponseWriter, r *http.Re
 		respondWithError(w, 400, fmt.Sprintf("Couldnt Get Feed Follows: %v", err))
 		return
 	}
-	respondWithJSON(w, 201, databaseFeedFollowsToFeedFollows(feedFollows))
+	respondWithJSON(w, 200, databaseFeedFollowsToFeedFollows(feedFollows))
 }
 
 func (apiCfg *apiConfig) handlerDeleteFeedFollow(w http.ResponseWriter, r *http.Request, user database.User) {
