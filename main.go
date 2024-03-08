@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 type apiConfig struct {
@@ -18,6 +19,7 @@ type apiConfig struct {
 }
 
 func main() {
+	// Load the environment variables
 
 	err := godotenv.Load()
 	if err != nil {
@@ -39,10 +41,13 @@ func main() {
 		log.Fatal("Cant Connect to The database", err)
 	}
 
+	db := database.New(conn)
+
 	apiCfg := apiConfig{
-		DB: database.New(conn),
+		DB: db,
 	}
 
+	go startScraping(db, 10, time.Minute)
 	router := chi.NewRouter()
 
 	router.Use(cors.Handler(cors.Options{
